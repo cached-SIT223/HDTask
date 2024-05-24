@@ -1,1 +1,75 @@
 
+pipeline {
+    agent any
+
+    environment {
+        DIRECTORY_PATH = "path"
+        TESTING_ENVIRONMENT = "Trill Testing Environemtn"
+        PRODUCTION_ENVIRONMENT = "Trill"
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'fetch the source code from the directory path specified by the environment variable..'
+                echo 'compile the code and generate any necessary artifacts'
+                echo 'specifying Mavern for the code'
+            }
+        }
+    
+        stage('Unit and Integration Tests') {
+            steps {
+                echo 'Unit tests..'
+                echo 'Specified tool to check the quality of the code is'
+            }
+             post {
+        	always {
+        		mail to: "sit223.deakinuni.me@gmail.com",
+        		subject: "Unit and Integration Tests Email",
+        		body: "Build log attached!"
+        	        }
+                  }
+        }
+
+    stage('Code Analysis') {
+            steps {
+                echo 'Integrating a code analysis tool to use in this environemnt'
+                echo 'need to use a code analysis tool to analyse my code, using Jenkins'
+            }
+        }
+     
+    stage('Security Scan') {
+            steps {
+                echo 'Peform a security scan of the code'
+                echo 'Research a good tool, using Jenkins'
+            }
+            post  {
+        	  always {
+        		mail to: "sit223.deakinuni.me@gmail.com",
+        		subject: "Security Scan Email",
+        		body: "Build log attached!"
+        	        }
+                   }
+        }
+
+    stage('Deploy to Staging') {
+            steps {
+                echo 'Deploy the application to a staging server (e.g., AWS EC2 instance).'
+            }
+        }
+
+     stage('Integration Tests pm Staging') {
+            steps {
+                echo 'Run integration tests on the staging environments.  Run integration tests on the staging environment to ensure the application functions' 
+                echo 'as expected in a production-like environment.'
+            }
+        }
+
+     stage('Deploy to Production') {
+            steps {
+                echo "this is the reply stage that is coming from ${PRODUCTION_ENVIRONMENT} to make the deployment"
+                echo 'deploy the application to a production server (e.g., AWS EC2 instance).'
+            }
+        }
+    }
+}
