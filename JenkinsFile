@@ -11,65 +11,36 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'fetch the source code from the directory path specified by the environment variable..'
+                echo 'Build artifact'
                 echo 'compile the code and generate any necessary artifacts'
                 echo 'specifying who knows what for the code'
             }
         }
     
-        stage('Unit and Integration Tests') {
+        stage('Tests') {
             steps {
                 echo 'Unit tests..'
-                echo 'Specified tool to check the quality of the code is'
+                echo 'Jenkins is configured to run automated tests on the code'
             }
-             /* post {
-        	always {
-        		mail to: "sit223.deakinuni.me@gmail.com",
-        		subject: "Unit and Integration Tests Email",
-        		body: "Build log attached!"
-        	        }
-                  } */
         }
 
-    stage('Code Analysis') {
+    stage('Code Quality Analysis') {
             steps {
-                echo 'Integrating a code analysis tool to use in this environemnt'
-                echo 'need to use a code analysis tool to analyse my code, using Jenkins'
+                echo 'Jenkins is configured to run automated tests on the code'
+                echo 'Selenium could be used, but other tools are our own CodeSnuffer.zsh'
             }
         }
      
-    stage('Security Scan') {
+    stage('Deploy') {
             steps {
-                echo 'Peform a security scan of the code'
-                echo 'This will be done with a tool called CodeChecker.zsh'
-                echo 'Research a good tool, using Jenkins'
-            }
-            /* post  {
-        	  always {
-        		mail to: "sit223.deakinuni.me@gmail.com",
-        		subject: "Security Scan Email",
-        		body: "Build log attached!"
-        	        }
-                   } +/
-        }
-
-    stage('Deploy to Staging') {
-            steps {
-                echo 'Deploy the application to a staging server.  This is going to be after we uncompress the file.'
+                echo 'Configure Jenkins to deploy application to test environment'
+                echo 'This will be done with a tool called ProgramElevate.zsh'
             }
         }
 
-     stage('Integration Tests pm Staging') {
+    stage('Release') {
             steps {
-                echo 'Run integration tests on the staging environments.  Run integration tests on the staging environment to ensure the application functions' 
-                echo 'as expected in a production-like environment.'
-            }
-        }
-
-     stage('Deploy to Production') {
-            steps {
-                echo "this is the reply stage that is coming from ${PRODUCTION_ENVIRONMENT} to make the deployment"
-                echo 'deploy the application to a production server, which in our case will be CS based'
+                echo 'Jenkins is used to deploy to production environment.  This is going to be after we uncompress the file.'
             }
         }
     }
