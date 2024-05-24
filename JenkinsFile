@@ -3,9 +3,9 @@ pipeline {
     agent any
 
     environment {
-        DIRECTORY_PATH = "path"
-        TESTING_ENVIRONMENT = "Trill Testing Environemtn"
-        PRODUCTION_ENVIRONMENT = "Trill"
+        DIRECTORY_PATH = "/home/Desktop/TrillHDProjects"
+        TESTING_ENVIRONMENT = ""
+        PRODUCTION_ENVIRONMENT = ""
     }
 
     stages {
@@ -13,7 +13,7 @@ pipeline {
             steps {
                 echo 'fetch the source code from the directory path specified by the environment variable..'
                 echo 'compile the code and generate any necessary artifacts'
-                echo 'specifying Mavern for the code'
+                echo 'specifying who knows what for the code'
             }
         }
     
@@ -22,13 +22,13 @@ pipeline {
                 echo 'Unit tests..'
                 echo 'Specified tool to check the quality of the code is'
             }
-             post {
+             /* post {
         	always {
         		mail to: "sit223.deakinuni.me@gmail.com",
         		subject: "Unit and Integration Tests Email",
         		body: "Build log attached!"
         	        }
-                  }
+                  } */
         }
 
     stage('Code Analysis') {
@@ -41,20 +41,21 @@ pipeline {
     stage('Security Scan') {
             steps {
                 echo 'Peform a security scan of the code'
+                echo 'This will be done with a tool called CodeChecker.zsh'
                 echo 'Research a good tool, using Jenkins'
             }
-            post  {
+            /* post  {
         	  always {
         		mail to: "sit223.deakinuni.me@gmail.com",
         		subject: "Security Scan Email",
         		body: "Build log attached!"
         	        }
-                   }
+                   } +/
         }
 
     stage('Deploy to Staging') {
             steps {
-                echo 'Deploy the application to a staging server (e.g., AWS EC2 instance).'
+                echo 'Deploy the application to a staging server.  This is going to be after we uncompress the file.'
             }
         }
 
@@ -68,7 +69,7 @@ pipeline {
      stage('Deploy to Production') {
             steps {
                 echo "this is the reply stage that is coming from ${PRODUCTION_ENVIRONMENT} to make the deployment"
-                echo 'deploy the application to a production server (e.g., AWS EC2 instance).'
+                echo 'deploy the application to a production server, which in our case will be CS based'
             }
         }
     }
